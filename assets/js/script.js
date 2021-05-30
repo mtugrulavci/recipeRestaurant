@@ -31,19 +31,24 @@ function bringRestaurants(){
              var searchTerm = document.querySelector("#rest").value;
              var distance = document.querySelector("#dist").value;
              var health = document.querySelector('#health').value;
-
+            if (health){
              var apiUrlRest = `https://api.edamam.com/api/menu-items/v2/search?q=${searchTerm}&lat=${lat}&lon=${lon}&dist=${distance}&health=${health}&app_id=${id}&app_key=${key}`
+            }else{
+                var apiUrlRest = `https://api.edamam.com/api/menu-items/v2/search?q=${searchTerm}&lat=${lat}&lon=${lon}&dist=${distance}&app_id=${id}&app_key=${key}`
+            }
              // nested api
             return fetch(apiUrlRest);
              }).then(function(response) {
                return response.json();
              }).then(function(rest){
                console.log(rest)
+
             });
           } else {
             alert("Error: " + response.statusText);
           }
         });
+
 }
 
 

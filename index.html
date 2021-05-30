@@ -5,8 +5,36 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Food Center</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body>
-    
+<header >
+    <div class="btnContainer">
+        <button class="restBtn btns"> Search Restaurant</button>
+        <button class="recipeBtn btns">Search Recipe </button>
+    </div>
+</header>
+<div class="container hide">
+    <div>
+        <label for="rest">Restaurant Type</label>
+        <input type="text" id="rest" name="rest"><br><br>
+        <label for="dist">Distance</label>
+        <input type="text" id="dist" name="dist"><br><br>
+
+        <label for="health">Health Label:</label>
+        <select name="health" id="health">
+            <option value="">Please choose an option</option>
+            <option value="vegan">vegan</option>
+            <option value="vegetarian">vegetarian</option>
+            <option value="gluten-free">gluten-free</option>
+        </select>
+        <button class="searchRest"> Search</button>
+    </div>
+
+</div>
+
+
+
+<script src="./assets/js/script.js" ></script>
 </body>
 </html>

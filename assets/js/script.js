@@ -5,6 +5,7 @@ var containerRest = document.querySelector(".containerRest");
 var searchRest = document.querySelector(".searchRest"); 
 var containerRecipe = document.querySelector(".containerRecipe")
 var searchRecipe = document.querySelector(".searchRecipe"); 
+var restResult = document.querySelector(".restResult")
 
 function hideRestaurants(){
     btnContainer.classList.add("hide");
@@ -13,6 +14,17 @@ function hideRestaurants(){
 function hideRecipe(){
     btnContainer.classList.add("hide");
     containerRecipe.classList.add("show");
+}
+
+function listRestaurants(rest){
+  restResult.innerHTML = "";
+  for(var i = 0; i< 10; i++){
+    var address = rest.hints[i].food.restaurant.address;
+    var postalCode = rest.hints[i].food.restaurant.postal;
+    restResult.innerHTML += `
+    <li>${address}  - ${postalCode} </li>`
+
+}
 }
 
 function bringRestaurants(){
@@ -42,6 +54,7 @@ function bringRestaurants(){
                return response.json();
              }).then(function(rest){
                console.log(rest)
+               listRestaurants(rest);
 
             });
           } else {

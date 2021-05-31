@@ -6,7 +6,7 @@ var searchRest = document.querySelector(".searchRest");
 var containerRecipe = document.querySelector(".containerRecipe")
 var searchRecipe = document.querySelector(".searchRecipe"); 
 var restResult = document.querySelector(".restResult")
-
+var recipeResult = document.querySelector(".recipeResult")
 function hideRestaurants(){
     btnContainer.classList.add("hide");
     containerRest.classList.add("show");
@@ -23,6 +23,17 @@ function listRestaurants(rest){
     var postalCode = rest.hints[i].food.restaurant.postal;
     restResult.innerHTML += `
     <li>${address}  - ${postalCode} </li>`
+
+}
+}
+
+function listRecipes(recipe){
+  recipeResult.innerHTML = "";
+  for(var i = 0; i< 10; i++){
+    var calorie = recipe.hits[i].recipe.calories;
+    var label = recipe.hits[i].recipe.label;
+    recipeResult.innerHTML += `
+    <li>${label}  - ${calorie} </li>`
 
 }
 }
@@ -72,8 +83,9 @@ function bringRecipe(recSearch){
   fetch(apiRecipe).then(function(response) {
     // request was successful
     if (response.ok) {
-        response.json().then(function(data) {
-            console.log(data);
+        response.json().then(function(recipe) {
+            console.log(recipe);
+            listRecipes(recipe);
           });
         } else {
           alert("Error: " + response.statusText);

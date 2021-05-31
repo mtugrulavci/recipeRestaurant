@@ -1,18 +1,18 @@
 var restBtn = document.querySelector(".restBtn");
 var recipeBtn = document.querySelector(".recipeBtn");
 var btnContainer =document.querySelector(".btnContainer");
-var container = document.querySelector(".container"); 
+var containerRest = document.querySelector(".containerRest"); 
 var searchRest = document.querySelector(".searchRest"); 
-
-
+var containerRecipe = document.querySelector(".containerRecipe")
+var searchRecipe = document.querySelector(".searchRecipe"); 
 
 function hideRestaurants(){
     btnContainer.classList.add("hide");
-    container.classList.add("show");
+    containerRest.classList.add("show");
 }
 function hideRecipe(){
     btnContainer.classList.add("hide");
-    container.classList.add("show");
+    containerRecipe.classList.add("show");
 }
 
 function bringRestaurants(){
@@ -51,7 +51,25 @@ function bringRestaurants(){
 
 }
 
+function bringRecipe(recSearch){
+  var recSearch = document.querySelector("#recipe").value;
+  var recipeApiKey = "5833503478a5c1d972dd59f1df3396f0"
+  var recipeId = "ec473133"
+  apiRecipe = `https://api.edamam.com/search?app_id=${recipeId}&app_key=${recipeApiKey}&q=${recSearch}`;
+  fetch(apiRecipe).then(function(response) {
+    // request was successful
+    if (response.ok) {
+        response.json().then(function(data) {
+            console.log(data);
+          });
+        } else {
+          alert("Error: " + response.statusText);
+        }
+      });
+
+}
 
 restBtn.addEventListener("click", hideRestaurants);
 recipeBtn.addEventListener("click", hideRecipe);
 searchRest.addEventListener("click", bringRestaurants);
+searchRecipe.addEventListener("click", bringRecipe);

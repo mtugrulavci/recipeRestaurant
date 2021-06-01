@@ -7,6 +7,7 @@ var containerRecipe = document.querySelector(".containerRecipe")
 var searchRecipe = document.querySelector(".searchRecipe"); 
 var restResult = document.querySelector(".restResult")
 var recipeResult = document.querySelector(".recipeResult")
+var goback = document.querySelector("#goback");
 function hideRestaurants(){
     btnContainer.classList.add("hide");
     containerRest.classList.add("show");
@@ -17,25 +18,32 @@ function hideRecipe(){
 }
 
 function listRestaurants(rest){
+  goback.classList.add("show");
   restResult.innerHTML = "";
   for(var i = 0; i< 10; i++){
     var address = rest.hints[i].food.restaurant.address;
     var postalCode = rest.hints[i].food.restaurant.postal;
     restResult.innerHTML += `
-    <li>${address}  - ${postalCode} </li>`
-
+    <li>${address}  -  ${postalCode} </li>`
 }
 }
-
 function listRecipes(recipe){
+  goback.classList.add("show");
   recipeResult.innerHTML = "";
   for(var i = 0; i< 10; i++){
     var calorie = recipe.hits[i].recipe.calories;
     var label = recipe.hits[i].recipe.label;
     recipeResult.innerHTML += `
     <li>${label}  - ${calorie} </li>`
-
 }
+}
+
+function goBack(){
+  containerRest.classList.remove("show");
+  containerRecipe.classList.remove("show");
+  btnContainer.classList.add("show");
+  goback.classList.remove("show");
+
 }
 
 function bringRestaurants(){
@@ -72,7 +80,6 @@ function bringRestaurants(){
             alert("Error: " + response.statusText);
           }
         });
-
 }
 
 function bringRecipe(recSearch){
@@ -91,10 +98,10 @@ function bringRecipe(recSearch){
           alert("Error: " + response.statusText);
         }
       });
-
 }
 
 restBtn.addEventListener("click", hideRestaurants);
 recipeBtn.addEventListener("click", hideRecipe);
 searchRest.addEventListener("click", bringRestaurants);
 searchRecipe.addEventListener("click", bringRecipe);
+goback.addEventListener("click", goBack);
